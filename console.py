@@ -29,6 +29,22 @@ class HBNBCommand(cmd.Cmd):
         """EOF exit the program"""
         return True
 
+    def do_create(self, args):
+        """Creates a new instance of BaseModel"""
+        pass
+
+    def do_show(self, args):
+        pass
+
+    def do_destroy(self, args):
+        pass
+
+    def do_all(self, args):
+        pass
+
+    def do_update(self, args):
+        pass
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
