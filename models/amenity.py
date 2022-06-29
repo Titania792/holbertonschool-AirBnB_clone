@@ -1,14 +1,14 @@
 #!/usr/bin/python3
-"""Write a class Amenity"""
+""" Write a class Amenity """
 
 from models.base_model import BaseModel
 import json
 
 
 class Amenity(BaseModel):
-    """inherits from BaseModel"""
+    """ Inherits from BaseModel """
 
     def __init__(self, *args, **kwargs):
-        """Public class attributes"""
+        """ Public class attributes """
         super().__init__(*args, **kwargs)
         self.name = str("")
