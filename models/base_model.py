@@ -6,13 +6,15 @@ attributes/methods for other classes"""
 from datetime import datetime
 import uuid
 import json
+import models
 
 
 class BaseModel:
-    """"""
+    """class basemodel that define all common attributes"""
 
     def __init__(self, *args, **kwargs):
         """Public instance attributes"""
+        time_format = '%Y-%m-%dT%H:%M:%S.%f'
         if kwargs is not None and len(kwargs) != 0:
             """ If kwargs is not None and is not empty """
             for key, value in kwargs.items():
@@ -21,17 +23,16 @@ class BaseModel:
                 elif key == "id":
                     self.id = value
                 elif key == "created_at":
-                    self.created_at = datetime.strptime(
-                        value, '%Y-%m-%dT%H:%M:%S.%f')
+                    self.created_at = datetime.strptime(value, time_format)
                 elif key == "updated_at":
-                    self.created_at = datetime.strptime(
-                        value, '%Y-%m-%dT%H:%M:%S.%f')
+                    self.updated_at = datetime.strptime(value, time_format)
                 else:
                     setattr(self, key, value)
         else:
             self.id = str(uuid.uuid4())
             self.created_at = datetime.utcnow()
             self.updated_at = datetime.utcnow()
+            models.storage.new(self)
 
     def __str__(self):
         """Public instance attributes"""
@@ -41,6 +42,7 @@ class BaseModel:
         """updates the public instance attribute
             updated_at with the current datetime"""
         self.updated_at = datetime.utcnow()
+        models.storage.save()
 
     def to_dict(self):
         """ returns a dictionary containing all keys/values
