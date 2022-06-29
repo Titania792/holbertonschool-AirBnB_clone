@@ -14,7 +14,7 @@ class BaseModel:
 
     def __init__(self, *args, **kwargs):
         """Public instance attributes"""
-        time_format = '%Y-%m-%dT%H:%M:%S.%f'
+        is_format = '%Y-%m-%dT%H:%M:%S.%f'
         if kwargs is not None and len(kwargs) != 0:
             """ If kwargs is not None and is not empty """
             for key, value in kwargs.items():
@@ -23,9 +23,9 @@ class BaseModel:
                 elif key == "id":
                     self.id = value
                 elif key == "created_at":
-                    self.created_at = datetime.strptime(value, time_format)
+                    self.created_at = datetime.strptime(value, is_format)
                 elif key == "updated_at":
-                    self.updated_at = datetime.strptime(value, time_format)
+                    self.updated_at = datetime.strptime(value, is_format)
                 else:
                     setattr(self, key, value)
         else:
