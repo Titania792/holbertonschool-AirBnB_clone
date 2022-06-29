@@ -31,7 +31,10 @@ class HBNBCommand(cmd.Cmd):
 
     def do_create(self, args):
         """Creates a new instance of BaseModel"""
-        pass
+        if args == 0:
+            print("** class name missing **")
+        if self.__class__.__name__ is False:
+            print("** class doesn't exist **")
 
     def do_show(self, args):
         pass
