@@ -5,7 +5,7 @@ from models.base_model import BaseModel
 import json
 
 
-class Amenity(BaseModel):
+class Review(BaseModel):
     """ Inherits from BaseModel """
 
     def __init__(self, *args, **kwargs):
