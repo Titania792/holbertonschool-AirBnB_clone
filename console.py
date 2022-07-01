@@ -131,12 +131,11 @@ class HBNBCommand(cmd.Cmd):
         storage.all()[key].__dict__[listt[2]] = listt[3]
         storage.save()
 
-    def point(self, args):
+    def advanced(self, args):
         """ Retrieve all instances of a class by using <class name>.<command name> """
-        listt = args.split(.)
-        class_name = listt[0]
-        if  listt[0] = "all()"
-            self.do_all(class_name)
+        listt = args.split(".")
+        if listt[1] == "all()":
+            self.do_all(self.classes[args[0]])
 
 
 if __name__ == '__main__':
