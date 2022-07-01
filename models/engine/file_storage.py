@@ -25,25 +25,17 @@ class FileStorage:
 
     def new(self, obj):
         """ Sets in __objects the obj with key <obj class name>.id """
-        key = '{}.{}'.format(obj.__class__.__name__, obj.id)
-        self.__objects[key] = obj
+        self.__objects[obj.__class__.__name__ + '.' + obj.id] = obj
 
     def save(self):
         """ Serializes __objects to the JSON file """
-        all_dict = {}
-        for key, value in self.__objects.items():
-            str_to_dict = value.to_dict()
-            all_dict[key] = str_to_dict
         with open(self.__file_path, 'w') as MyFile:
-            json.dump(all_dict, MyFile)
+            json.dump(self.__objects, MyFile, default=str)
 
     def reload(self):
         """ Deserializes the JSON file to __objects """
         try:
-            with open(self.__file_path, 'r') as MyFile:
-                to_dict = json.load(MyFile)
-                for key, value in to_dict.items():
-                    to_obj = BaseModel(**value)
-                    self.__objects[key] = to_obj
+            with open(self.__file_path) as MyFile:
+                self.__objects = json.load(MyFile)
         except FileNotFoundError:
-            return
+            pass
