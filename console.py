@@ -133,7 +133,7 @@ class HBNBCommand(cmd.Cmd):
 
     def advanced(self, args):
         """ Retrieve all instances of a class by using <class name>.<command name> """
-        listt = args.split(".")
+        listt = args.split('.')
         if listt[1] == "all()":
             self.do_all(self.classes[args[0]])
 
