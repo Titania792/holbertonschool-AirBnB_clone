@@ -23,6 +23,7 @@ class HBNBCommand(cmd.Cmd):
                "City": City, "Place": Place, "State": State, "Review": Review}
 
     def emptyline(self):
+        """ Don't execute anything if an empty line + enter are typed """
         pass
 
     def do_quit(self, args):
@@ -130,12 +131,6 @@ class HBNBCommand(cmd.Cmd):
             return
         storage.all()[key].__dict__[listt[2]] = listt[3]
         storage.save()
-
-    def advanced(self, args):
-        """ Retrieve all instances of a class by using <class name>.<command name> """
-        listt = args.split('.')
-        if listt[1] == "all()":
-            self.do_all(self.classes[args[0]])
 
 
 if __name__ == '__main__':
