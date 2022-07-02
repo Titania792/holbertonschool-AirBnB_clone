@@ -10,6 +10,7 @@ from models.city import City
 from models.place import Place
 from models.state import State
 from models.review import Review
+import os
 import json
 
 
@@ -29,13 +30,18 @@ class FileStorage:
 
     def save(self):
         """ Serializes __objects to the JSON file """
+        all_dict = {}
+        for key in self.__objects:
+            all_dict[key] = self.__objects[key].to_dict()
         with open(self.__file_path, 'w') as MyFile:
-            json.dump(self.__objects, MyFile, default=str)
+            json.dump(all_dict, MyFile)
 
     def reload(self):
         """ Deserializes the JSON file to __objects """
         try:
-            with open(self.__file_path) as MyFile:
-                self.__objects = json.load(MyFile)
+            with open(self.__file_path, 'r') as MyFile:
+                my_dict = json.load(MyFile)
+                for key, value in my_dict.items():
+                    self.new(eval(value['__class__'])(**value))
         except FileNotFoundError:
             pass

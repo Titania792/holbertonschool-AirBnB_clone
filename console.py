@@ -62,7 +62,9 @@ class HBNBCommand(cmd.Cmd):
         listt = args.split()
         if len(listt) == 0:
             print("** class name missing **")
-            return
+            :x
+            :x
+            :x
         if listt[0] not in self.classes:
             print("** class doesn't exist **")
             return

@@ -3,7 +3,6 @@
 attributes/methods for other classes"""
 
 
-from models.engine import file_storage
 from datetime import datetime
 import uuid
 import json
