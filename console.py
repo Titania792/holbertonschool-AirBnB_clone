@@ -109,7 +109,7 @@ class HBNBCommand(cmd.Cmd):
         """Updates an instance based on the class name and id by
         adding or updating attribute"""
         listt = args.split()
-        if len(listt) == 0:
+        if len(listt) == 0 or list is None:
             print("** class name missing **")
             return
         if listt[0] not in self.classes:
