@@ -42,4 +42,5 @@ class FileStorage:
             with open(self.__file_path, 'r') as MyFile:
                 my_dict = json.load(MyFile)
                 for key, value in my_dict.items():
+
                     self.new(eval(value['__class__'])(**value))
