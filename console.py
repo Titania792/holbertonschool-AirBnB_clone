@@ -128,8 +128,13 @@ class HBNBCommand(cmd.Cmd):
         if len(listt) == 3:
             print("** value missing **")
             return
-        storage.all()[key].__dict__[listt[2]] = (listt[3])
-        storage.save()
+        keys = f"{listt[0]}.{listt[1]}"
+        if listt[0] in self.classes:
+            dicts = storage.all()
+            if keys in storage.all():
+                obj = dicts[keys]
+                setattr(obj, listt[2], eval(listt[3]))
+                storage.save()
 
 
 if __name__ == '__main__':
