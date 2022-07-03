@@ -109,26 +109,28 @@ class HBNBCommand(cmd.Cmd):
         """Updates an instance based on the class name and id by
         adding or updating attribute"""
         listt = args.split()
+        dict_aux = storage.all()
+        objects = f"{listt[0]}.{listt[1]}"
         if len(listt) == 0:
             print("** class name missing **")
             return
         if listt[0] not in self.classes:
             print("** class doesn't exist **")
             return
-        if len(listt) == 1:
+        if len(listt) == 1 or listt[1] is None or listt[1] == "":
             print("** instance id missing **")
             return
         key = listt[0] + "." + listt[1]
         if key not in storage.all():
             print("** no instance found **")
             return
-        if len(listt) == 2:
+        if len(listt) == 2 or listt[2] is None or listt[3] == "":
             print("** attribute name missing **")
             return
-        if len(listt) == 3:
+        if len(listt) == 3 or listt[3] is None or listt[3] == "":
             print("** value missing **")
             return
-        storage.all()[key].__dict__[listt[2]] = (listt[3])
+        setattr(storage.all()[key], listt[2], listt[3])
         storage.save()
 
 
