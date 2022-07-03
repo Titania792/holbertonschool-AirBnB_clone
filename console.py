@@ -62,9 +62,6 @@ class HBNBCommand(cmd.Cmd):
         listt = args.split()
         if len(listt) == 0:
             print("** class name missing **")
-            :x
-            :x
-            :x
         if listt[0] not in self.classes:
             print("** class doesn't exist **")
             return
@@ -131,7 +128,7 @@ class HBNBCommand(cmd.Cmd):
         if len(listt) == 3:
             print("** value missing **")
             return
-        storage.all()[key].__dict__[listt[2]] = listt[3]
+        storage.all()[key].__dict__[listt[2]] = eval(listt[3])
         storage.save()
 
 
