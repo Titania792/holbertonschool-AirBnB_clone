@@ -7,7 +7,7 @@ import json
 
 class Place(BaseModel):
     """ Inherits from BaseModel """
-    
+
     city_id = ""
     user_id = ""
     name = ""
