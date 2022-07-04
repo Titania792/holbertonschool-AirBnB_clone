@@ -157,6 +157,25 @@ class HBNBCommand(cmd.Cmd):
                 self.do_all(listt[0])
             elif listt[1] == "count()":
                 self.do_count(listt[0])
+            else:
+                nlistt = listt[1].split('(')
+                nlistt[1] = nlistt[1][:-1]
+                if nlistt[0] == "show":
+                    self.do_show(f"{listt[0]} {nlistt[1]}")
+                elif nlistt[0] == "destroy":
+                    self.do_destroy(f"{listt[0]} {nlistt[1]}")
+                elif nlistt[0] == "update":
+                    if nlistt[1].find('{') == -1:
+                        nlistt[1] = nlistt[1].replace(',', "")
+                        self.do_update(f"{listt[0]} {nlistt[1]}")
+                    else:
+                        chars = "}{,':\""
+                        for x in range(len(chars)):
+                            nlistt[1] = nlistt[1].replace(chars[x], " ")
+                        nl_dict = nlistt[1].split()
+                        for x in range(1, len(nl_dict), 2):
+                            self.do_update(f"{listt[0]} {nl_dict[0]} \
+                                    {nl_dict[x]} \"{nl_dict[x + 1]}\"")
 
 
 if __name__ == '__main__':
