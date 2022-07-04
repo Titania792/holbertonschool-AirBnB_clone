@@ -43,5 +43,25 @@ class test_fileStorage(unittest.TestCase):
         self.assertEqual(srg, storage.all())
         self.assertIs(srg, storage.all())
 
+    def test_reload(self):
+        """ checking reload method """
+        obj = FileStorage()
+        obj.reload()
+        self.assertIsNotNone(obj.all())
+        self.assertIs(obj.all(), obj.all())
+
+    def test_save(self):
+        """ checking save method """
+        obj = FileStorage()
+        base = BaseModel()
+        base.name = "Holberton"
+        bmid = base.id
+        storage.new(base)
+        storage.save()
+        with open('file.json', 'r') as f:
+            self.assertIsNotNone(f.read())
+        self.assertIsNotNone(
+            storage.all()[base.__class__.__name__ + "." + bmid])
+
     if __name__ == '__main__':
         unittest.main()
