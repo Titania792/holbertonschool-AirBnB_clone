@@ -36,6 +36,15 @@ class HBNBCommand(cmd.Cmd):
         """EOF exit the program"""
         return True
 
+    def do_hello(self, args):
+        """Says hello. If you provide a name, it will greet you with it."""
+        if len(args) == 0:
+            name = 'stranger'
+        else:
+            name = args
+        print(
+            f"Hello {name}, welcome to the HBNB Console made by Tati and Agus! enter 'help' for more info")
+
     def do_create(self, args):
         """Creates a new instance of an object"""
         if args is not None and args != "":
