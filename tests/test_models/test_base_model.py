@@ -98,6 +98,15 @@ class test_basemodel(unittest.TestCase):
         new_updated_at = bm.__dict__['updated_at']
         storage.reload()
         self.assertEqual(bm.__dict__['updated_at'], new_updated_at)
+        bm1 = BaseModel()
+        updated_at = bm1.__dict__['updated_at']
+        bm1.save(self)
+        self.assertNotEqual(bm1.__dict__['updated_at'], updated_at)
+        self.assertTrue(os.path.isfile('file.json'))
+        new_updated_at = bm1.__dict__['updated_at']
+        storage.reload()
+        self.assertEqual(bm1.__dict__['updated_at'], new_updated_at)
+        
 
     def test_to_dict(self):
         """ checkss to_dict method """
