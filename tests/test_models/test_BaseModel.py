@@ -5,25 +5,12 @@ from time import sleep
 import unittest
 from models.base_model import BaseModel
 from datetime import datetime
+from models import storage
+import os
 
 
 class test_basemodel(unittest.TestCase):
     """ Test BaseModel Class """
-
-    def test_basemodel_init(self):
-        """ checking BaseModel init """
-        bm = BaseModel()
-        self.assertEqual(bm.id, str(bm.id))
-        self.assertEqual(str(bm.created_at), str(
-            datetime.now().strftime("%Y-%m-%d %H:%M:%S.%f")))
-        self.assertEqual(str(bm.updated_at), str(
-            datetime.now().strftime("%Y-%m-%d %H:%M:%S.%f")))
-
-    def test_basemodel_str(self):
-        """ checking BaseModel str """
-        bm = BaseModel()
-        self.assertEqual(
-            str(bm), "[BaseModel] ({}) {}".format(bm.id, bm.__dict__))
 
     def test_basemodel_save(self):
         """ checking BaseModel save """
@@ -72,6 +59,53 @@ class test_basemodel(unittest.TestCase):
         self.assertIsInstance(bm.id, str)
         self.assertNotEqual(bm.id, bm2.id)
         self.assertFalse(bm.id == bm2.id)
+
+    def test_inst(self):
+        """ checks if the instances of BaseModel are correctly created"""
+        bm = BaseModel()
+        bm1 = BaseModel()
+        self.assertNotEqual(bm.id, bm1.id)
+        self.assertNotEqual(bm.created_at, bm1.created_at)
+        self.assertNotEqual(bm.updated_at, bm1.updated_at)
+        self.assertIn(bm, storage.all().values())
+        self.assertIn(bm1, storage.all().values())
+
+    def test_attr(self):
+        """checks the types of the attributes"""
+        bm = BaseModel()
+        bm.name = "Holberton"
+        bm.age = 89
+        self.assertIs(datetime, type(bm.updated_at))
+        self.assertIs(datetime, type(bm.created_at))
+        self.assertIs(str, type(bm.id))
+        self.assertEqual(int, type(bm.age))
+        self.assertIn(bm.name, bm.to_dict().values())
+
+    def test__str__(self):
+        """ checks the __str__ method """
+        bm = BaseModel()
+        self.assertEqual(
+            f"[{type(bm).__name__}] ({bm.id}) {bm.__dict__}", str(bm))
+
+    def test_save(self):
+        """ checks the save method """
+        bm = BaseModel()
+        updated_at = bm.__dict__['updated_at']
+        bm.save()
+        self.assertNotEqual(bm.__dict__['updated_at'], updated_at)
+        self.assertTrue(os.path.isfile('file.json'))
+        new_updated_at = bm.__dict__['updated_at']
+        storage.reload()
+        self.assertEqual(bm.__dict__['updated_at'], new_updated_at)
+
+    def test_to_dict(self):
+        """ checkss to_dict method """
+        bm = BaseModel()
+        bm_dict = bm.to_dict()
+        self.assertEqual(bm_dict["id"], bm.id)
+        self.assertEqual(bm_dict["created_at"], bm.created_at.isoformat())
+        self.assertEqual(bm_dict["updated_at"], bm.updated_at.isoformat())
+        self.assertEqual(bm_dict['__class__'], bm.__class__.__name__)
 
 
 if __name__ == '__main__':
