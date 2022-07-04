@@ -11,6 +11,7 @@ from models.amenity import Amenity
 from models.user import User
 from models import storage
 import cmd
+import shlex
 import sys
 
 
@@ -108,7 +109,7 @@ class HBNBCommand(cmd.Cmd):
     def do_update(self, args):
         """Updates an instance based on the class name and id by
         adding or updating attribute"""
-        listt = args.split()
+        listt = shlex.split(args)
         if len(listt) == 0:
             print("** class name missing **")
             return
