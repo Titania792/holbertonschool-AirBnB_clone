@@ -8,9 +8,6 @@ import json
 class Review(BaseModel):
     """ Inherits from BaseModel """
 
-    def __init__(self, *args, **kwargs):
-        """ Public class attributes """
-        super().__init__(*args, **kwargs)
-        self.place_id = str("")
-        self.user_id = str("")
-        self.text = str("")
+    place_id = ""
+    user_id = ""
+    text = ""
