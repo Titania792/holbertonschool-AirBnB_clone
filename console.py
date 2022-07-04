@@ -132,6 +132,24 @@ class HBNBCommand(cmd.Cmd):
         storage.all()[key].__dict__[listt[2]] = listt[3]
         storage.save()
 
+    def do_count(self, args):
+        """ Retrieve number of instances """
+        count = 0
+        listt = args.split()
+        for key in storage.all():
+            if listt[0] in key:
+                count += 1
+        print(count)
+
+    def default(self, args):
+        """ Advanced commands """
+        listt = args.split('.')
+        if len(listt) == 2:
+            if listt[1] == "all()":
+                self.do_all(listt[0])
+            elif listt[1] == "count()":
+                self.do_count(listt[0])
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
