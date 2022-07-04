@@ -31,14 +31,6 @@ class HBNBCommand(cmd.Cmd):
         """Quit command to exit the program"""
         raise SystemExit
 
-    def do_hello(self, args):
-        """Says hello. If you provide a name, it will greet you with it."""
-        if len(args) == 0:
-            name = 'stranger'
-        else:
-            name = args
-        print(f"Hello, {name}")
-
     def do_EOF(self, arg):
         """EOF exit the program"""
         return True
