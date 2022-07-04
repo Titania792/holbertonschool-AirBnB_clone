@@ -149,13 +149,6 @@ class HBNBCommand(cmd.Cmd):
                 self.do_all(listt[0])
             elif listt[1] == "count()":
                 self.do_count(listt[0])
-            elif:
-                new_listt = listt[1].split('(')
-                new_listt = new_listt[1][:-1]
-                if new_listt[0] == "show":
-                    self.do_show(f"{listt[0]} {new_listt[1]}")
-                elif new_listt[0] == "destroy":
-                    self.do_destroy(f"{listt[0]} {new_listt[1]}")
 
 
 if __name__ == '__main__':
