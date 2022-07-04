@@ -63,5 +63,17 @@ class test_fileStorage(unittest.TestCase):
         self.assertIsNotNone(
             storage.all()[base.__class__.__name__ + "." + bmid])
 
+    def test_save_reload(self):
+        """ checking save and reload method """
+        obj = FileStorage()
+        base = BaseModel()
+        base.name = "Holberton"
+        bmid = base.id
+        storage.new(base)
+        storage.save()
+        storage.reload()
+        self.assertIsNotNone(
+            storage.all()[base.__class__.__name__ + "." + bmid])
+
     if __name__ == '__main__':
         unittest.main()
