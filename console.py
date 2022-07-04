@@ -13,6 +13,7 @@ from models import storage
 import cmd
 import shlex
 import sys
+import json
 
 
 class HBNBCommand(cmd.Cmd):
@@ -37,17 +38,19 @@ class HBNBCommand(cmd.Cmd):
 
     def do_create(self, args):
         """Creates a new instance of an object"""
-        listt = args.split()
-        if len(listt) == 0:
+        if args is not None and args != "":
+            listt = args.split()
+            if listt[0] not in self.classes:
+                print("** class doesn't exist **")
+                return
+            else:
+                gett = getattr(sys.modules[__name__], listt[0])
+                newinst = gett()
+                newinst.save()
+                print(newinst.id)
+        else:
             print("** class name missing **")
             return
-        if listt[0] not in self.classes:
-            print("** class doesn't exist **")
-            return
-        else:
-            new_obj = self.classes[listt[0]]()
-            storage.new(new_obj)
-            print(eval(new_obj.__class__.__name__ + "()").id)
 
     def do_show(self, args):
         """Prints the string representation of an instance based on
