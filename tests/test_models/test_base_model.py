@@ -133,6 +133,23 @@ class test_basemodel(unittest.TestCase):
         storage.reload()
         self.assertEqual(bm1.__dict__['updated_at'], new_updated_at)
 
+    def test_reload(self):
+        """ checks the reload method """
+        bm = BaseModel()
+        bm.save()
+        storage.reload()
+        self.assertTrue(os.path.isfile('file.json'))
+        key = f"{bm.__class__.__name__}.{bm.id}"
+        self.assertEqual(bm.__dict__['updated_at'],
+                         storage.all()[key].updated_at)
+        bm1 = BaseModel()
+        bm1.save()
+        storage.reload()
+        self.assertTrue(os.path.isfile('file.json'))
+        key1 = f"{bm1.__class__.__name__}.{bm1.id}"
+        self.assertEqual(bm1.__dict__['updated_at'],
+                         storage.all()[key1].updated_at)
+
 
 if __name__ == '__main__':
     unittest.main()
