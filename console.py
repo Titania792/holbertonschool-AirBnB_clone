@@ -153,9 +153,9 @@ class HBNBCommand(cmd.Cmd):
                 new_listt = listt[1].split('(')
                 new_listt = new_listt[1][:-1]
                 if new_listt[0] == "show":
-                    self.do_show(f"{listt[0]} {new_listt[1]")
+                    self.do_show(f"{listt[0]} {new_listt[1]}")
                 elif new_listt[0] == "destroy":
-                    self.do_destroy(f"{listt[0] {new_listt[1]}}")
+                    self.do_destroy(f"{listt[0]} {new_listt[1]}")
 
 
 if __name__ == '__main__':
