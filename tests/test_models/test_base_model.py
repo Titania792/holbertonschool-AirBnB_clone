@@ -116,6 +116,23 @@ class test_basemodel(unittest.TestCase):
         self.assertEqual(bm_dict["updated_at"], bm.updated_at.isoformat())
         self.assertEqual(bm_dict['__class__'], bm.__class__.__name__)
 
+    def test_save_file(self):
+        """ checks the save method """
+        bm = BaseModel()
+        updated_at = bm.__dict__['updated_at']
+        bm.save()
+        self.assertTrue(os.path.isfile('file.json'))
+        new_updated_at = bm.__dict__['updated_at']
+        storage.reload()
+        self.assertEqual(bm.__dict__['updated_at'], new_updated_at)
+        bm1 = BaseModel()
+        updated_at = bm1.__dict__['updated_at']
+        bm1.save()
+        self.assertTrue(os.path.isfile('file.json'))
+        new_updated_at = bm1.__dict__['updated_at']
+        storage.reload()
+        self.assertEqual(bm1.__dict__['updated_at'], new_updated_at)
+
 
 if __name__ == '__main__':
     unittest.main()
