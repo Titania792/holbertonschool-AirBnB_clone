@@ -9,6 +9,8 @@ from datetime import datetime
 from models import storage
 import os
 
+from models.engine.file_storage import FileStorage
+
 
 class test_basemodel(unittest.TestCase):
     """ Test BaseModel Class """
@@ -116,22 +118,17 @@ class test_basemodel(unittest.TestCase):
         self.assertEqual(bm_dict["updated_at"], bm.updated_at.isoformat())
         self.assertEqual(bm_dict['__class__'], bm.__class__.__name__)
 
-    def test_save_file(self):
+    def test_save(self):
         """ checks the save method """
         bm = BaseModel()
-        updated_at = bm.__dict__['updated_at']
+        fs = FileStorage()
+        update = bm.__dict__['updated_at']
         bm.save()
         self.assertTrue(os.path.isfile('file.json'))
-        new_updated_at = bm.__dict__['updated_at']
-        storage.reload()
-        self.assertEqual(bm.__dict__['updated_at'], new_updated_at)
-        bm1 = BaseModel()
-        updated_at = bm1.__dict__['updated_at']
-        bm1.save()
-        self.assertTrue(os.path.isfile('file.json'))
-        new_updated_at = bm1.__dict__['updated_at']
-        storage.reload()
-        self.assertEqual(bm1.__dict__['updated_at'], new_updated_at)
+        self.assertNotEqual(bm.__dict__['updated_at'], update)
+        update = bm.__dict__['updated_at']
+        fs.reload()
+        self.assertEqual(bm.__dict__['updated_at'], update)
 
     def test_reload(self):
         """ checks the reload method """
