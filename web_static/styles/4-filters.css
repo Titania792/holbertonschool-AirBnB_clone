@@ -1,0 +1,8 @@
+.filters {
+    position: relative;
+    height: 70px;
+    background-color: white;
+    width: 100%;
+    border: 1px solid #DDDDDD;
+    border-radius: 4px;
+}
