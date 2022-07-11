@@ -42,9 +42,11 @@
 
 .popover h2 {
     font-size: 16px;
+    margin-left: -30px;
 }
 
 .popover {
+    margin-top: -1px;
     opacity: 0;
     visibility: hidden;
     position: relative;
@@ -53,10 +55,6 @@
     border: 1px solid #DDDDDD;
     border-radius: 4px;
     padding: 20px 50px;    
-}
-
-.locations .popover li {
-    margin-left: 30px;
 }
 
 .locations:hover .popover, .amenities:hover .popover {
