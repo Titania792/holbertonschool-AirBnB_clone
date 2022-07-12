@@ -38,13 +38,10 @@
     width: 60px;
     height: 60px;
     font-size: 30px;
-    font-weight: bold;
     display: flex;
-    justify-content: center;
-    align-items: center;
     align-content: center;
     padding: 7px;
-    right: 40px;
+    right: 10px;
     top: 10px;
     
 }
@@ -58,6 +55,7 @@
     width: 100%;
     border-bottom: 1px solid #CCCCCC;
     border-top: 1px solid #CCCCCC;
+    padding: 10px;
 }
 
 .user {
